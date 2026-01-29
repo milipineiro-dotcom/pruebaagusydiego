@@ -19,7 +19,7 @@ const weddingData = {
 };
 
 // URL DE TU GOOGLE APPS SCRIPT (PEGA TU URL AQUÍ DESPUÉS DE HACER EL DEPLOY)
-const SCRIPT_URL = 'PEGA_AQUI_LA_URL_DE_TU_APPS_SCRIPT'; 
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby0B6HxjaAt1R6jVfoOE20x_ScujUYlQ-X6neSo2Tf8qBJsZ3oIYoaZV6aYu5dvkZc/exec'; 
 
 // 1. ANIMACIÓN DEL SOBRE
 const envelopeContainer = document.getElementById('envelope-trigger');
