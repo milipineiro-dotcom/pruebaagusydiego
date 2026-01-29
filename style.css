@@ -1,0 +1,228 @@
+:root {
+    --bg-color: #F2EFE2;
+    --envelope-color: #948060;
+    --lavender: #807093;
+    --green: #878F67;
+    --text-color: #5A5A5A;
+    --font-script: 'Pinyon Script', cursive;
+    --font-serif: 'Cormorant Garamond', serif;
+}
+
+/* Reset y Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-color);
+    /* Textura de papel usando ruido SVG simulado */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    color: var(--text-color);
+    font-family: var(--font-serif);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Tipografía */
+h1, h2, h3 { font-weight: 400; color: var(--envelope-color); }
+h1 { font-family: var(--font-script); font-size: 3.5rem; margin-bottom: 0.5rem; }
+h2 { font-family: var(--font-script); font-size: 2.8rem; margin-bottom: 1rem; }
+.ornament { font-size: 2rem; color: var(--green); margin: 10px 0; }
+
+/* ANIMACIÓN DEL SOBRE */
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.envelope-container {
+    cursor: pointer;
+    perspective: 1000px;
+    z-index: 10;
+    transition: transform 1s ease;
+}
+
+.envelope {
+    width: 300px;
+    height: 200px;
+    background-color: var(--envelope-color);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 110px solid #A38D6B; /* Un tono más claro para simular luz */
+    transform-origin: top;
+    transition: transform 0.6s ease 0.2s, z-index 0.2s;
+    z-index: 5;
+}
+
+.pocket {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 100px solid var(--envelope-color);
+    z-index: 4;
+}
+
+.letter {
+    position: absolute;
+    bottom: 0;
+    width: 280px;
+    height: 250px; /* Más alto para que salga */
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.8s ease 0.6s;
+    transform: translateY(100px); /* Escondido */
+    z-index: 2;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Polaroid Styles */
+.polaroid {
+    background: white;
+    padding: 10px 10px 25px 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: rotate(-3deg);
+    margin-bottom: 10px;
+}
+.polaroid img { width: 100%; height: auto; display: block; filter: sepia(20%); }
+
+.hero-names { font-size: 2rem; margin: 0; color: #333; }
+.hero-date { font-family: var(--font-serif); font-size: 1rem; letter-spacing: 2px; }
+.tap-hint { font-size: 0.8rem; margin-top: 10px; opacity: 0.7; animation: blink 2s infinite; }
+
+/* Estado Abierto del Sobre */
+.envelope-container.open {
+    transform: translateY(150px) scale(0.8);
+    opacity: 0; 
+    pointer-events: none;
+    transition: all 1s ease 1s; /* Desaparece al final */
+}
+
+.envelope-container.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-container.open .letter {
+    transform: translateY(-150px) scale(1.2);
+    z-index: 15; /* Sube por encima de todo */
+}
+
+/* Contenido Principal */
+.main-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+.hidden { opacity: 0; pointer-events: none; }
+.fade-in { animation: fadeIn 2s ease forwards; animation-delay: 1.5s; }
+
+/* Secciones Generales */
+section {
+    padding: 60px 20px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(148, 128, 96, 0.2);
+    padding: 30px;
+    border-radius: 8px; /* Bordes suaves pero no excesivamente redondos */
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(148, 128, 96, 0.05);
+}
+
+.date-display {
+    border-top: 1px solid var(--envelope-color);
+    border-bottom: 1px solid var(--envelope-color);
+    display: inline-flex;
+    gap: 10px;
+    padding: 10px 20px;
+    font-family: var(--font-serif);
+    margin-bottom: 15px;
+    color: var(--envelope-color);
+    font-weight: bold;
+}
+
+.time { font-size: 1.5rem; font-style: italic; color: var(--lavender); margin-bottom: 5px; }
+.location { font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.address { margin-bottom: 20px; font-style: italic; color: #777; }
+
+/* Botones */
+.actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-filled { background-color: var(--envelope-color); color: white; }
+.btn-outline { background-color: transparent; border: 1px solid var(--envelope-color); color: var(--envelope-color); }
+.btn-big { background-color: var(--lavender); color: white; font-size: 1.2rem; padding: 15px 40px; width: 100%; margin-top: 20px; }
+.btn-insta { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; width: 80%; }
+.btn-text { background: none; border: none; color: var(--lavender); text-decoration: underline; cursor: pointer; margin: 10px 0; font-size: 0.9rem; }
+
+.btn:active { transform: scale(0.98); }
+
+/* Modal */
+.modal {
+    display: none; 
+    position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; 
+    background-color: rgba(242, 239, 226, 0.95); /* Fondo crema translúcido */
+    justify-content: center; align-items: center;
+}
+.modal-content {
+    background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 400px;
+    position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--envelope-color);
+}
+.close-modal { position: absolute; top: 10px; right: 20px; font-size: 30px; cursor: pointer; color: var(--envelope-color); }
+.form-group { margin-bottom: 15px; text-align: left; }
+.form-group label { display: block; margin-bottom: 5px; color: var(--text-color); }
+.form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: var(--font-serif); }
+
+.guest-card {
+    background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid var(--lavender);
+    animation: slideIn 0.3s ease;
+}
+
+/* Animaciones Utilitarias */
+@keyframes blink { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.3; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Scroll Animations */
+.fade-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.fade-on-scroll.visible { opacity: 1; transform: translateY(0); }
