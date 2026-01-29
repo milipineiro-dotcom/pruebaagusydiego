@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda de Agustina & Diego</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header id="inicio">
+        <div class="envelope-container" id="envelope-trigger">
+            <div class="envelope">
+                <div class="flap"></div>
+                <div class="pocket"></div>
+                <div class="letter">
+                    <div class="polaroid">
+                        <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=600&auto=format&fit=crop" alt="Foto Novios">
+                    </div>
+                    <h1 class="hero-names">Agustina & Diego</h1>
+                    <p class="hero-date">16 . 10 . 2026</p>
+                    <p class="tap-hint">Tocá para abrir</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content hidden" id="main-content">
+            <div class="hero-text fade-in">
+                <p class="intro-text">Con inmensa alegría, queremos invitarte a celebrar nuestro amor.</p>
+            </div>
+            <div class="scroll-indicator">↓</div>
+        </div>
+    </header>
+
+    <section class="event-section fade-on-scroll">
+        <div class="ornament">❧</div>
+        <h2>Ceremonia Civil</h2>
+        <div class="card">
+            <div class="date-display">
+                <span class="day">16</span>
+                <span class="month">OCT</span>
+                <span class="year">2026</span>
+            </div>
+            <p class="time">11:30 HS</p>
+            <p class="location">Registro Civil Central</p>
+            <p class="address">Av. Ficticia 123, Buenos Aires</p>
+            
+            <div class="actions">
+                <button class="btn btn-outline" onclick="openMap('civil')">
+                    <i class="fa-solid fa-location-dot"></i> Ver Ubicación
+                </button>
+                <button class="btn btn-filled" onclick="addToCalendar('civil')">
+                    <i class="fa-regular fa-calendar-plus"></i> Agendar
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-section fade-on-scroll">
+        <div class="ornament">❧</div>
+        <h2>La Fiesta</h2>
+        <div class="card">
+            <div class="date-display">
+                <span class="day">17</span>
+                <span class="month">OCT</span>
+                <span class="year">2026</span>
+            </div>
+            <p class="time">19:00 HS</p>
+            <p class="location">Estancia La Soñada</p>
+            <p class="address">Ruta 2 Km 50, Buenos Aires</p>
+            
+            <div class="actions">
+                <button class="btn btn-outline" onclick="openMap('party')">
+                    <i class="fa-solid fa-location-dot"></i> Ver Ubicación
+                </button>
+                <button class="btn btn-filled" onclick="addToCalendar('party')">
+                    <i class="fa-regular fa-calendar-plus"></i> Agendar
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="rsvp-section fade-on-scroll">
+        <div class="ornament">❦</div>
+        <h3>¿Nos acompañás?</h3>
+        <p>Es muy importante para nosotros que confirmes tu asistencia antes del 1 de Octubre.</p>
+        <button class="btn btn-big" onclick="openRSVP()">Confirmar Asistencia</button>
+    </section>
+
+    <section class="social-section fade-on-scroll">
+        <p>Seguí esta cuenta para enterarte de las novedades de la boda</p>
+        <a href="https://instagram.com" target="_blank" class="btn btn-insta">
+            <i class="fa-brands fa-instagram"></i> @aguydeigo.boda
+        </a>
+    </section>
+
+    <footer>
+        <p>Hecho con amor • 2026</p>
+    </footer>
+
+    <div id="rsvp-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeRSVP()">&times;</span>
+            <h3>Confirmación</h3>
+            <form id="rsvp-form">
+                <div class="form-group">
+                    <label>Tu Nombre y Apellido</label>
+                    <input type="text" name="main_guest" required placeholder="Ej: Juan Pérez">
+                </div>
+                
+                <div id="guests-container">
+                    </div>
+
+                <button type="button" class="btn-text" onclick="addGuestField()">+ Agregar acompañante</button>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-filled" id="submit-btn">Enviar Confirmación</button>
+                </div>
+                <p id="form-status"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
